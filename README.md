@@ -11,18 +11,30 @@
 ## Install
 
 ```sh
-npm install mop --save
+npm install mop-cli --global
 ```
 
 ## Usage
 
-Get it into your program.
+**NOTE: On Node < 8, `mop` needs to be `node --harmony "$(which mop)"`**
 
-```js
-const mop = require('mop');
+```console
+$ mop --help
+
+  Usage
+    $ mop [pinned | outdated]
+
+  Example
+    $ mop pinned
 ```
 
 ## API
+
+### mop.pinned(cwd)
+
+Returns a `Promise` for an `Array` of projects whose dependencies do not conform to the usual `^1.2.3` pattern.
+
+*This includes non-caret ranges, git dependencies, and more. Suggestions for a better name welcome!*
 
 ### mop.outdated(cwd)
 

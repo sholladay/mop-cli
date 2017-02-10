@@ -29,7 +29,9 @@ const humanDepType = (key) => {
     return humanTitle(key).replace('Dependencies', 'Dependency');
 };
 const headline = chalk.bold.yellow.underline;
-const columnHead = chalk.bold.blue.underline;
+const columnHead = (str) => {
+    return chalk.bold.blue.underline(str);
+};
 
 const showTable = (lines) => {
     console.log(table(lines, {
