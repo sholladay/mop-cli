@@ -16,7 +16,7 @@ npm install mop-cli --global
 
 ## Usage
 
-**NOTE: On Node < 8, `mop` needs to be `node --harmony "$(which mop)"`**
+**NOTE: On Node < 7.6, `mop` needs to be `node --harmony "$(which mop)"`**
 
 ```console
 $ mop --help
