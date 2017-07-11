@@ -24,7 +24,9 @@
     "node": ">=6"
   },
   "license": "MPL-2.0",
-  "bin": "cli.js",
+  "bin": {
+    "mop": "cli.js"
+  },
   "files": [
     "lib",
     "index.js",
