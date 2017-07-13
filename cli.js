@@ -85,6 +85,6 @@ else if (cmd === 'pinned') {
     });
 }
 else {
-    console.error('Unknown mop command.');
+    console.error(`Unknown mop command, "${cmd}".`);
     process.exit(1);
 }
