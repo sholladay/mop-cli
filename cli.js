@@ -3,7 +3,7 @@
 'use strict';
 
 const table = require('text-table');
-const chalk = require('chalk');
+const { bold } = require('chalk');
 const stripAnsi = require('strip-ansi');
 const cli = require('meow')(`
     Usage
@@ -28,9 +28,9 @@ if (!cmd) {
 const humanDepType = (key) => {
     return humanTitle(key).replace('Dependencies', 'Dependency');
 };
-const headline = chalk.bold.yellow.underline;
+const headline = bold.yellow.underline;
 const columnHead = (str) => {
-    return chalk.bold.blue.underline(str);
+    return bold.cyan(str);
 };
 
 const showTable = (lines) => {
