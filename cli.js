@@ -44,18 +44,13 @@ const showTable = (lines) => {
 if (cmd === 'outdated') {
     const print = (project) => {
         console.log(headline(project.name));
-        const lines = [];
-        Object.keys(project).forEach((key) => {
-            if (!isDepKey(key)) {
-                return;
-            }
-            const headings = [humanDepType(key), 'Wanted', 'Latest'].map(columnHead);
-            lines.push(headings);
-            const category = project[key];
-            for (const [name, spec] of Object.entries(category)) {
-                lines.push([name, spec.wanted, spec.latest]);
-            }
-        });
+        const lines = Array.prototype.concat(...Object.keys(project).filter(isDepKey).map((depType) => {
+            const headings = [humanDepType(depType), 'Wanted', 'Latest'].map(columnHead);
+            const depMap = project[depType];
+            return [headings, ...Object.entries(depMap).map(([name, spec]) => {
+                return [name, spec.wanted, spec.latest];
+            })];
+        }));
         showTable(lines);
     };
     mop[cmd]().then((projects) => {
@@ -65,18 +60,13 @@ if (cmd === 'outdated') {
 else if (cmd === 'pinned') {
     const print = (project) => {
         console.log(headline(project.name));
-        const lines = [];
-        Object.keys(project).forEach((key) => {
-            if (!isDepKey(key)) {
-                return;
-            }
-            const headings = [humanDepType(key), 'Wanted', 'Expected'].map(columnHead);
-            lines.push(headings);
-            const category = project[key];
-            for (const [name, spec] of Object.entries(category)) {
-                lines.push([name, spec.wanted, spec.expected]);
-            }
-        });
+        const lines = Array.prototype.concat(...Object.keys(project).filter(isDepKey).map((depType) => {
+            const headings = [humanDepType(depType), 'Wanted', 'Expected'].map(columnHead);
+            const depMap = project[depType];
+            return [headings, ...Object.entries(depMap).map(([name, spec]) => {
+                return [name, spec.wanted, spec.expected];
+            })];
+        }));
         showTable(lines);
     };
 
