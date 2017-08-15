@@ -28,17 +28,114 @@ $ mop --help
     $ mop pinned
 ```
 
+## Rules
+
+See the [list of rules](docs/rules.md) to change what triggers `mop` to complain.
+
+## Data types
+
+### Project
+
+A project is an object with `name`, `path` and `pkg` properties.
+
+#### name
+
+Type: `string`
+
+Either `pkg.name` if it is available or the [basename](https://nodejs.org/api/path.html#path_path_basename_path_ext) of the project's `path`.
+
+#### path
+
+Type: `string`
+
+Filepath of the project's root directory.
+
+#### pkg
+
+Type: `object`, `null`
+
+Parsed package.json found within `path`, or `null` if the file is missing. An error will be thrown if the file is present but cannot be read or is invalid.
+
+### Result
+
+A result is a project with additional properties for .
+
+#### problems
+
+Type: `Array<Problem>`
+
+A list of problems the project has, as reported by rules.
+
+#### errors
+
+Type: `Array<Problem>`
+
+Same as `problems`, but only those whose `severity` is `error`.
+
+#### warnings
+
+Type: `Array<Problem>`
+
+Same as `problems`, but only those whose `severity` is `warn`.
+
+### Problem
+
+Each rule may optionally return a problem descriptor, which represents a rule violation.
+
+#### message
+
+Type: `string`
+
+A message describing the problem.
+
+#### path
+
+Type: `string`
+
+Filepath that is responsible for the problem.
+
+#### line
+
+Type: `number`
+
+A positive, zero-based integer within the file where the problem occurred.
+
+#### column
+
+Type: `number`
+
+A positive, zero-based integer within the line where the problem occurred.
+
+#### data
+
+Type: any
+
+Arbitrary data that reporters can use to enhance output.
+
 ## API
 
-### mop.pinned(cwd)
+### mop(option)
 
-Returns a `Promise` for an `Array` of projects whose dependencies do not conform to the usual `^1.2.3` pattern.
+#### option
 
-*This includes non-caret ranges, git dependencies, and more. Suggestions for a better name welcome!*
+##### cwd
 
-### mop.outdated(cwd)
+Type: `string`<br>
+Default: `process.cwd()`
 
-Returns a `Promise` for an `Array` of outdated projects.
+Final directory in a downwards search for projects. Only used when no `projects` are provided.
+
+##### projects
+
+Type: `Array<Project>`
+
+List of projects to lint.
+
+##### rules
+
+Type: `Array<Rule>`
+
+List of rules to use for validating projects.
 
 ## Contributing
 
