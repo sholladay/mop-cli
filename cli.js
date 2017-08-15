@@ -2,6 +2,7 @@
 
 'use strict';
 
+require('throw-rejects')();
 const table = require('text-table');
 const { bold } = require('chalk');
 const stripAnsi = require('strip-ansi');
@@ -41,40 +42,37 @@ const showTable = (lines) => {
     }) + '\n');
 };
 
-if (cmd === 'outdated') {
-    const print = (project) => {
-        console.log(headline(project.name));
-        const lines = Array.prototype.concat(...Object.keys(project).filter(isDepKey).map((depType) => {
-            const headings = [humanDepType(depType), 'Wanted', 'Latest'].map(columnHead);
-            const depMap = project[depType];
-            return [headings, ...Object.entries(depMap).map(([name, spec]) => {
+const lines = Object.assign(Object.create(null), {
+    outdated : (depContainer) => {
+        return Object.entries(depContainer).reduce((rows, [depType, depMap]) => {
+            rows.push([humanDepType(depType), 'Wanted', 'Latest'].map(columnHead));
+            return rows.concat(Object.entries(depMap).map(([name, spec]) => {
                 return [name, spec.wanted, spec.latest];
-            })];
-        }));
-        showTable(lines);
-    };
-    mop[cmd]().then((projects) => {
-        projects.forEach(print);
-    });
-}
-else if (cmd === 'pinned') {
-    const print = (project) => {
-        console.log(headline(project.name));
-        const lines = Array.prototype.concat(...Object.keys(project).filter(isDepKey).map((depType) => {
-            const headings = [humanDepType(depType), 'Wanted', 'Expected'].map(columnHead);
-            const depMap = project[depType];
-            return [headings, ...Object.entries(depMap).map(([name, spec]) => {
+            }));
+        }, []);
+    },
+    pinned : (depContainer) => {
+        return Object.entries(depContainer).reduce((rows, [depType, depMap]) => {
+            rows.push([humanDepType(depType), 'Wanted', 'Expected'].map(columnHead));
+            return rows.concat(Object.entries(depMap).map(([name, spec]) => {
                 return [name, spec.wanted, spec.expected];
-            })];
-        }));
-        showTable(lines);
-    };
+            }));
+        }, []);
+    }
+})[cmd];
 
-    mop[cmd]().then((projects) => {
-        projects.forEach(print);
+mop({
+    rules : [
+        require('./lib/rule/' + cmd)
+    ]
+}).then((failedProjects) => {
+    failedProjects.forEach((project) => {
+        console.log(headline(project.name));
+        showTable(lines(project.errors[0].data));
     });
-}
-else {
-    console.error(`Unknown mop command, "${cmd}".`);
-    process.exit(1);
-}
+    if (failedProjects.length > 0) {
+        const subject = failedProjects.length === 1 ? 'project' : 'projects';
+        console.error(bold.red(failedProjects.length + ' failed', subject));
+        process.exitCode = 1;
+    }
+});
