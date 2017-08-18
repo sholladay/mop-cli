@@ -30,6 +30,10 @@ This ensures that your dependencies are coming from a proper registry, with all 
 }
 ```
 
+### Related
+
+ - caret-deps - Require package.json dependencies to use `^` caret ranges
+
 ## caret-deps
 
 > Require package.json dependencies to use `^` caret ranges
@@ -57,6 +61,10 @@ Note that this rule only applies to dependencies that are specified using semver
     }
 }
 ```
+
+### Related
+
+ - semver-deps - Require package.json dependencies to use [semver](https://docs.npmjs.com/getting-started/semantic-versioning)
 
 ## clean-repo
 
@@ -97,3 +105,29 @@ This ensures that you are working on the branch where releases are made, so your
 > Require repoistory to ignore dependencies
 
 This ensures that `node_modules` is never commited. It is generally best to install dependencies from scratch on each machine because they may need to be compiled for a specific operating system.
+
+## has-files
+
+> Require a specific set of paths to exist
+
+This ensures the presence of one or more files in a project.
+
+### Related
+
+ - disallow-files - Require a specific set of paths to _not_ exist
+
+## disallow-files
+
+> Require a specific set of paths to _not_ exist
+
+### Related
+
+ - has-files - Require a specific set of paths to exist
+
+## pkg-has-keys
+
+> Require package.json to have certain properties
+
+## pkg-key-order
+
+> Require package.json properties to be in a specific order
