@@ -3,6 +3,7 @@
 'use strict';
 
 require('throw-rejects')();
+require('root-check')();
 const table = require('text-table');
 const { bold } = require('chalk');
 const stripAnsi = require('strip-ansi');
@@ -14,7 +15,6 @@ const cli = require('meow')(`
       $ mop pinned
 `);
 const humanTitle = require('./lib/human-title');
-const isDepKey = require('./lib/is-dep-key');
 const mop = require('.');
 
 require('update-notifier')({ pkg : cli.pkg }).notify();

@@ -16,8 +16,6 @@ npm install mop-cli --global
 
 ## Usage
 
-**NOTE: On Node < 7.6, `mop` needs to be `node --harmony "$(which mop)"`**
-
 ```console
 $ mop --help
 
@@ -27,6 +25,8 @@ $ mop --help
   Example
     $ mop pinned
 ```
+
+*Tip: On Node < 7.6, `mop` needs to be `node --harmony "$(which mop)"`*
 
 ## Rules
 
@@ -56,9 +56,9 @@ Type: `object`, `null`
 
 Parsed package.json found within `path`, or `null` if the file is missing. An error will be thrown if the file is present but cannot be read or is invalid.
 
-### Result
+### Project Result
 
-A result is a project with additional properties for .
+A result is a project with additional properties for rule violations that were detected.
 
 #### problems
 
@@ -116,6 +116,8 @@ Arbitrary data that reporters can use to enhance output.
 
 ### mop(option)
 
+Returns a `Promise` for an `Array` of project results.
+
 #### option
 
 ##### cwd
@@ -149,6 +151,6 @@ See our [contributing guidelines](https://github.com/sholladay/mop-cli/blob/mast
 
 ## License
 
-[MPL-2.0](https://github.com/sholladay/mop-cli/blob/master/LICENSE "The license for mop-cli.") © [Seth Holladay](http://seth-holladay.com "Author of mop-cli.")
+[MPL-2.0](https://github.com/sholladay/mop-cli/blob/master/LICENSE "The license for mop-cli.") © [Seth Holladay](https://seth-holladay.com "Author of mop-cli.")
 
 Go make something, dang it.

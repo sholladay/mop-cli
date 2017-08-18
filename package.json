@@ -6,7 +6,7 @@
   "main": "index.js",
   "author": {
     "name": "Seth Holladay",
-    "url": "http://seth-holladay.com",
+    "url": "https://seth-holladay.com",
     "email": "me@seth-holladay.com"
   },
   "scripts": {
@@ -33,13 +33,13 @@
     "cli.js"
   ],
   "dependencies": {
-    "chalk": "^2.0.1",
-    "code-dir": "^0.2.0",
+    "chalk": "^2.1.0",
     "humanize-string": "^1.0.1",
     "latest-version": "^3.1.0",
     "meow": "^3.7.0",
-    "project-dirs": "^0.1.0",
+    "project-dirs": "^0.1.1",
     "read-pkg": "^2.0.0",
+    "root-check": "^1.0.0",
     "semver": "^5.3.0",
     "strip-ansi": "^4.0.0",
     "text-table": "^0.2.0",
@@ -48,7 +48,7 @@
     "update-notifier": "^2.2.0"
   },
   "devDependencies": {
-    "eslint-config-tidy": "^0.4.1",
+    "eslint-config-tidy": "^0.5.0",
     "xo": "^0.18.2"
   },
   "keywords": [
