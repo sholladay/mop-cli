@@ -11,10 +11,10 @@ const lint = async (option) => {
     if (projects.length < 1) {
         throw new RangeError('You must provide at least one project');
     }
-    const userConfig = Object.assign({}, config.config);
-    const rules = Object.keys(userConfig.rule || {})
+    const ruleConfig = Object.assign({}, config.rule);
+    const rules = Object.keys(ruleConfig)
         .filter((ruleId) => {
-            const [severity] = [].concat(userConfig.rule[ruleId]);
+            const [severity] = [].concat(ruleConfig[ruleId]);
             return severity && severity !== 'off';
         })
         .map((ruleId) => {
@@ -31,11 +31,11 @@ const lint = async (option) => {
     const projectResults = await Promise.all(projects.map(async (project) => {
         const ruleResults = await Promise.all(rules.map(async (rule) => {
             const ruleId = rule.id;
-            const ruleConfig = [].concat(userConfig.rule[ruleId]);
-            const ruleResult = await rule(project, ...ruleConfig.slice(1));
+            const [severity, ...ruleArgs] = [].concat(ruleConfig[ruleId]);
+            const ruleResult = await rule(project, ...ruleArgs);
             return ruleResult && Object.assign({}, ruleResult, {
                 ruleId,
-                severity : ruleConfig[0]
+                severity
             });
         }));
         const problems = ruleResults.filter((ruleResult) => {
