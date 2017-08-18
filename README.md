@@ -64,7 +64,7 @@ A result is a project with additional properties for rule violations that were d
 
 Type: `Array<Problem>`
 
-A list of problems the project has, as reported by rules.
+A list of all rule violations the project is responsible for.
 
 #### errors
 
@@ -80,7 +80,7 @@ Same as `problems`, but only those whose `severity` is `warn`.
 
 ### Problem
 
-Each rule may optionally return a problem descriptor, which represents a rule violation.
+Each rule may optionally return a problem descriptor, which represents a rule violation. The only required property is `message`.
 
 #### message
 
@@ -111,6 +111,23 @@ A positive, zero-based integer within the line where the problem occurred.
 Type: any
 
 Arbitrary data that reporters can use to enhance output.
+
+---
+
+**The problem descriptor will be enhanced with the following properties before it is returned to users.**
+
+#### ruleId
+
+Type: `string`
+
+The rule that reported the problem.
+
+#### severity
+
+Type: `string`<br>
+Example: `warn`
+
+The problem level, as configured by the user for the rule.
 
 ## API
 

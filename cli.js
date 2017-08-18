@@ -62,13 +62,15 @@ const lines = Object.assign(Object.create(null), {
 })[cmd];
 
 mop({
-    rules : [
-        require('./lib/rule/' + cmd)
-    ]
+    config : {
+        rule : {
+            [cmd] : 'error'
+        }
+    }
 }).then((failedProjects) => {
     failedProjects.forEach((project) => {
         console.log(headline(project.name));
-        showTable(lines(project.errors[0].data));
+        showTable(lines(project.problems[0].data));
     });
     if (failedProjects.length > 0) {
         const subject = failedProjects.length === 1 ? 'project' : 'projects';
