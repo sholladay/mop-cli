@@ -30,7 +30,7 @@ $ mop --help
 
 ## Rules
 
-See the [list of rules](docs/rules.md) to change what triggers `mop` to complain.
+See the [list of rules](./doc/README.md) to change what triggers `mop` to complain.
 
 ## Data types
 
