@@ -62,10 +62,9 @@ const lines = Object.assign(Object.create(null), {
 })[cmd];
 
 mop({
-    config : {
-        rule : {
-            [cmd] : 'error'
-        }
+    cwd    : cli.flags.cwd,
+    rule : {
+        [cmd] : 'error'
     }
 }).then((failedProjects) => {
     failedProjects.forEach((project) => {

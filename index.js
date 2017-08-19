@@ -8,7 +8,7 @@ const lint = async (option) => {
     const config = Object.assign({}, option);
     const cwd = path.resolve(config.cwd || '');
     const projects = config.projects || await findProjects.withPkg(cwd);
-    if (projects.length < 1) {
+    if (!projects || projects.length < 1) {
         throw new RangeError('You must provide at least one project');
     }
     const ruleConfig = Object.assign({}, config.rule);
