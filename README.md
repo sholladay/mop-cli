@@ -1,6 +1,6 @@
 # mop-cli [![Build status for mop-cli on Circle CI.](https://img.shields.io/circleci/project/sholladay/mop-cli/master.svg "Circle Build Status")](https://circleci.com/gh/sholladay/mop-cli "Mop CLI Builds")
 
-> Maintain your projects.
+> Maintain your projects
 
 ## Why?
 

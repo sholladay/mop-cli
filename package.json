@@ -1,7 +1,7 @@
 {
     "name": "mop-cli",
     "version": "0.1.0",
-    "description": "Maintain your projects.",
+    "description": "Maintain your projects",
     "homepage": "https://github.com/sholladay/mop-cli",
     "main": "index.js",
     "author": {
