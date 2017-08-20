@@ -7,7 +7,7 @@ const findProjects = require('./lib/find-projects');
 const lint = async (option) => {
     const config = Object.assign({}, option);
     const cwd = path.resolve(config.cwd || '');
-    const projects = config.projects || await findProjects.withPkg(cwd);
+    const projects = config.projects || await findProjects(cwd);
     if (!projects || projects.length < 1) {
         throw new RangeError('You must provide at least one project');
     }
