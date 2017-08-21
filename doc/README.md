@@ -17,6 +17,7 @@ What sets this apart from other tools you may have used is that it is also an as
  - [forbid-files](./rule/forbid-files) - Require a specific set of paths to _not_ exist
  - [has-files](./rule/has-files) - Require a specific set of paths to exist
  - [ignores-deps](./rule/ignores-deps) - Require repoistory to ignore dependencies
+ - [latest-deps](./rule/latest-deps) - Require package.json dependencies to be up to date
  - [on-master](./rule/on-master) - Require repository HEAD to be the `master` branch
  - [pkg-has-keys](./rule/pkg-has-keys) - Require package.json to have certain properties
  - [pkg-key-order](./rule/pkg-key-order) - Require package.json properties to be in a specific order
