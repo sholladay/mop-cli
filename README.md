@@ -133,7 +133,7 @@ The problem level, as configured by the user for the rule.
 
 Returns a [problem](#problem) or an `Array` of problems, optionally wrapped in a `Promise`, if the project violates the expectations of the rule.
 
-It is recommended that if you report multiple problems, you make an effort to sort them such that the most important problems come first. This is to be friendly to the user, given that there may be various limits on how many problems can be displayed to the user at any given time.
+Learn more about rules in [how to create one](./doc/README.md#create-a-rule).
 
 #### project
 
@@ -143,18 +143,7 @@ A [project](#project) for the rule to check.
 
 #### args
 
-Anything you want users to be able to pass to the rule from their configuration. Useful for configuring the rule itself. Please consider whether making a separate rule would be better instead of using this.
-
-It is recommended that you use a single `option` object, if possible, for readability. Keep in mind that, at a glance, there is very little context for users to know what your rule is or what it is doing, beyond its name and arguments. So make them read well in the user's configuration.
-
-You can easily collect all of your custom arguments with the [rest](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) operator.
-
-```js
-const myRule = (project, ...args) => {
-    console.log(args.length);
-};
-myRule({}, 'foo', 'bar');  // => 2
-```
+Custom arguments for the rule provided by the user in their configuration. Most rules that use this accept just a single `option` object with properties for configuring the rule.
 
 ## API
 
@@ -162,22 +151,22 @@ myRule({}, 'foo', 'bar');  // => 2
 
 Returns a `Promise` for an `Array` of [project](#project) results with lists of rule violations.
 
-#### option
+### option
 
-##### cwd
+#### cwd
 
 Type: `string`<br>
 Default: `process.cwd()`
 
 Final directory in a downwards search for projects. Only used when no `projects` are provided.
 
-##### projects
+#### projects
 
 Type: `Array<Project>`
 
 List of [projects](#project) to lint.
 
-##### rule
+#### rule
 
 Type: `object`
 
@@ -188,7 +177,7 @@ Example:
 ```js
 {
     'caret-deps' : 'warn',
-    'foo'        : ['error', 'blah']
+    foo          : ['error', 'blah']
 }
 ```
 
