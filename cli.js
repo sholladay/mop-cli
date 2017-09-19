@@ -19,9 +19,9 @@ const mop = require('.');
 
 require('update-notifier')({ pkg : cli.pkg }).notify();
 
-const [cmd] = cli.input;
+const [ruleName] = cli.input;
 
-if (!cmd) {
+if (!ruleName) {
     console.error('Please provide a command for mop to do.');
     process.exit(1);
 }
@@ -43,7 +43,7 @@ const showTable = (lines) => {
 };
 
 const lines = Object.assign(Object.create(null), {
-    outdated : (depContainer) => {
+    'latest-deps' : (depContainer) => {
         return Object.entries(depContainer).reduce((rows, [depType, depMap]) => {
             rows.push([humanDepType(depType), 'Wanted', 'Latest'].map(columnHead));
             return rows.concat(Object.entries(depMap).map(([name, spec]) => {
@@ -51,7 +51,7 @@ const lines = Object.assign(Object.create(null), {
             }));
         }, []);
     },
-    pinned : (depContainer) => {
+    'caret-deps' : (depContainer) => {
         return Object.entries(depContainer).reduce((rows, [depType, depMap]) => {
             rows.push([humanDepType(depType), 'Wanted', 'Expected'].map(columnHead));
             return rows.concat(Object.entries(depMap).map(([name, spec]) => {
@@ -59,12 +59,12 @@ const lines = Object.assign(Object.create(null), {
             }));
         }, []);
     }
-})[cmd];
+})[ruleName];
 
 mop({
     cwd    : cli.flags.cwd,
     rule : {
-        [cmd] : 'error'
+        [ruleName] : 'error'
     }
 }).then((failedProjects) => {
     failedProjects.forEach((project) => {
@@ -74,6 +74,11 @@ mop({
     if (failedProjects.length > 0) {
         const subject = failedProjects.length === 1 ? 'project' : 'projects';
         console.error(bold.red(failedProjects.length + ' failed', subject));
-        process.exitCode = 1;
+    }
+    const hasError = failedProjects.some((project) => {
+        return project.errors.length > 0;
+    });
+    if (hasError) {
+        process.exit(1);
     }
 });
