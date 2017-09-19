@@ -12,20 +12,20 @@ What sets this apart from other tools you may have used is that it is also an as
 
 ## Available rules
 
- - [caret-deps](./rule/caret-deps) - Require package.json dependencies to use `^` caret ranges
- - [clean-repo](./rule/clean-repo) - Require all repository changes to be committed
- - [forbid-files](./rule/forbid-files) - Require a specific set of paths to _not_ exist
- - [has-files](./rule/has-files) - Require a specific set of paths to exist
- - [ignores-deps](./rule/ignores-deps) - Require repoistory to ignore dependencies
- - [latest-deps](./rule/latest-deps) - Require package.json dependencies to be up to date
- - [on-master](./rule/on-master) - Require repository HEAD to be the `master` branch
- - [pkg-has-keys](./rule/pkg-has-keys) - Require package.json to have certain properties
- - [pkg-key-order](./rule/pkg-key-order) - Require package.json properties to be in a specific order
- - [pulled-repo](./rule/pulled-repo) - Require all remote repository changes to be pulled
- - [pushed-repo](./rule/pushed-repo) - Require all repository commits to be pushed
- - [released-commits](./rule/released-commits) - Require repository HEAD to resolve to a tag
- - [repo-ignores](./rule/repo-ignores) - Require repository to ignore files
- - [semver-deps](./rule/semver-deps) - Require package.json dependencies to use [semver](https://docs.npmjs.com/getting-started/semantic-versioning)
+ - [caret-deps](./rule/caret-deps.md) - Require package.json dependencies to use `^` caret ranges
+ - [clean-repo](./rule/clean-repo.md) - Require all repository changes to be committed
+ - [forbid-files](./rule/forbid-files.md) - Require a specific set of paths to _not_ exist
+ - [has-files](./rule/has-files.md) - Require a specific set of paths to exist
+ - [ignores-deps](./rule/ignores-deps.md) - Require repoistory to ignore dependencies
+ - [latest-deps](./rule/latest-deps.md) - Require package.json dependencies to be up to date
+ - [on-master](./rule/on-master.md) - Require repository HEAD to be the `master` branch
+ - [pkg-has-keys](./rule/pkg-has-keys.md) - Require package.json to have certain properties
+ - [pkg-key-order](./rule/pkg-key-order.md) - Require package.json properties to be in a specific order
+ - [pulled-repo](./rule/pulled-repo.md) - Require all remote repository changes to be pulled
+ - [pushed-repo](./rule/pushed-repo.md) - Require all repository commits to be pushed
+ - [released-commits](./rule/released-commits.md) - Require repository HEAD to resolve to a tag
+ - [repo-ignores](./rule/repo-ignores.md) - Require repository to ignore files
+ - [semver-deps](./rule/semver-deps.md) - Require package.json dependencies to use [semver](https://docs.npmjs.com/getting-started/semantic-versioning)
 
 ## Using rules
 
@@ -43,7 +43,7 @@ In your configuration, provide a rule name and your desired severity level.
 }
 ```
 
-If the rule you are using takes [custom arguments](#custom-arguments), you can configure the rule with an array. The first element is the severity level. All others will be passed to the rule as-is.
+If a rule you are using takes [custom arguments](#custom-arguments), you can configure it with an array. The first element is the severity level. All others will be passed to the rule as-is.
 
 ```js
 {
