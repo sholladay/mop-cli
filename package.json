@@ -10,7 +10,7 @@
         "email": "me@seth-holladay.com"
     },
     "scripts": {
-        "test": "xo"
+        "test": "xo && ava"
     },
     "repository": {
         "type": "git",

@@ -6,7 +6,6 @@ const makePackage = (pkg) => {
 };
 
 test('rule: caret-deps', (t) => {
-    const nonPackage = {};
     t.falsy(caretDeps({}), 'must ignore non-packages');
     t.falsy(caretDeps(makePackage({})), 'must ignore empty packages');
     t.falsy(caretDeps(makePackage({ dependencies : {} })), 'must ignore packages with no dependencies');
