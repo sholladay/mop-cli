@@ -8,7 +8,7 @@ What sets this apart from other tools you may have used is that it is also an as
 
  - [Available rules](#available-rules)
  - [Using rules](#using-rules)
- - [Create a rule](#create-a-rule)
+ - [Creating rules](#creating-rules)
 
 ## Available rules
 
@@ -51,7 +51,7 @@ If a rule you are using takes [custom arguments](#custom-arguments), you can con
 }
 ```
 
-## Create a rule
+## Creating rules
 
 First, choose a name. The requirements for naming a rule are as follows.
 

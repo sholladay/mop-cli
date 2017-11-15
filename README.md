@@ -30,7 +30,7 @@ $ mop --help
 
 ## Rules
 
-See the [list of rules](./doc/README.md) to change what triggers `mop` to complain.
+See the [list of rules](doc/README.md) to change what triggers `mop` to complain.
 
 ## Data types
 
@@ -133,7 +133,7 @@ The problem level, as configured by the user for the rule.
 
 Returns a [problem](#problem) or an `Array` of problems, optionally wrapped in a `Promise`, if the project violates the expectations of the rule.
 
-Learn more about rules in [how to create one](./doc/README.md#create-a-rule).
+Learn more about rules by [creating one](doc/README.md#creating-rules).
 
 #### project
 
