@@ -53,7 +53,7 @@ If a rule you are using takes [custom arguments](#custom-arguments), you can con
 
 ## Create a rule
 
-First, choose a name. There are a few requirements for naming a rule.
+First, choose a name. The requirements for naming a rule are as follows.
 
  - It must be a valid module ID that we can import with Node's [require()](http://fredkschott.com/post/2014/06/require-and-the-module-system/)
  - It must be URL safe so that people can easily view and share it
@@ -91,6 +91,8 @@ Because the rule always reports a violation, it is pretty useless, and you can e
 From here, you can implement your own logic for the rule. Just remember to only return an object if the project violates the rule's expectations. You can return any object that has the necessary properties to represent a [problem](../README.md#problem).
 
 You can also report multiple problems at once in an `Array`. It is recommended that if you report multiple problems, you make an effort to sort them such that the most important problems come first. This is to be friendly to the user, given that there may be various limits on how many problems can be displayed to the user at any given time.
+
+Rules can optionally be implemented as an [`async` function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) or wrap their return value in a [`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
 ### Custom arguments
 
