@@ -15,13 +15,13 @@ const lint = async (option) => {
     const rules = Object.keys(ruleConfig)
         .filter((ruleId) => {
             const [severity] = [].concat(ruleConfig[ruleId]);
+            if (!['off', 'warn', 'error'].includes(severity)) {
+                throw new Error('Rule severity must be "off", "warn", or "error"');
+            }
             return severity && severity !== 'off';
         })
         .map((ruleId) => {
-            const rule = loadRule(ruleId);
-            // TODO: Do not mutate user-provided object.
-            rule.id = ruleId;
-            return rule;
+            return loadRule(ruleId);
         });
 
     if (rules.length < 1) {
@@ -44,11 +44,11 @@ const lint = async (option) => {
 
         return Object.assign({}, project, {
             problems,
-            errors : problems.filter((problem) => {
-                return problem.severity === 'error';
+            errors : problems.filter(({ severity }) => {
+                return severity === 'error';
             }),
-            warnings : problems.filter((problem) => {
-                return problem.severity === 'warn';
+            warnings : problems.filter(({ severity }) => {
+                return severity === 'warn';
             })
         });
     }));
