@@ -1,6 +1,6 @@
-# mop-cli [![Build status for mop-cli on Circle CI.](https://img.shields.io/circleci/project/sholladay/mop-cli/master.svg "Circle Build Status")](https://circleci.com/gh/sholladay/mop-cli "Mop CLI Builds")
+# mop-cli [![Build status for Mop CLI](https://img.shields.io/circleci/project/sholladay/mop-cli/master.svg "Build Status")](https://circleci.com/gh/sholladay/mop-cli "Builds")
 
-> Maintain your projects
+> Lint and maintain many projects at once
 
 ## Why?
 
@@ -183,16 +183,16 @@ Example:
 
 ## Contributing
 
-See our [contributing guidelines](https://github.com/sholladay/mop-cli/blob/master/CONTRIBUTING.md "The guidelines for participating in this project.") for more details.
+See our [contributing guidelines](https://github.com/sholladay/mop-cli/blob/master/CONTRIBUTING.md "Guidelines for participating in this project") for more details.
 
 1. [Fork it](https://github.com/sholladay/mop-cli/fork).
 2. Make a feature branch: `git checkout -b my-new-feature`
 3. Commit your changes: `git commit -am 'Add some feature'`
 4. Push to the branch: `git push origin my-new-feature`
-5. [Submit a pull request](https://github.com/sholladay/mop-cli/compare "Submit code to this project for review.").
+5. [Submit a pull request](https://github.com/sholladay/mop-cli/compare "Submit code to this project for review").
 
 ## License
 
-[MPL-2.0](https://github.com/sholladay/mop-cli/blob/master/LICENSE "The license for mop-cli.") © [Seth Holladay](https://seth-holladay.com "Author of mop-cli.")
+[MPL-2.0](https://github.com/sholladay/mop-cli/blob/master/LICENSE "License for mop-cli") © [Seth Holladay](https://seth-holladay.com "Author of mop-cli")
 
 Go make something, dang it.
