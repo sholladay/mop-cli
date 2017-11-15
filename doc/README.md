@@ -88,7 +88,7 @@ $ mop my-rule
 
 Because the rule always reports a violation, it is pretty useless, and you can expect to see a lot of output.
 
-From here, you can implement your own logic for the rule. Just remember to only return an object if the project violates the rule's expectations. You can return any object that has the necessary properties to represent a [problem](../README.md#problem).
+From here, you can implement your own logic for the rule to analyze the [project](../README.md#project). Just remember to only return an object if the project violates the rule's expectations. You can return any object that has the necessary properties to represent a [problem](../README.md#problem).
 
 You can also report multiple problems at once in an `Array`. It is recommended that if you report multiple problems, you make an effort to sort them such that the most important problems come first. This is to be friendly to the user, given that there may be various limits on how many problems can be displayed to the user at any given time.
 
