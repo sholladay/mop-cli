@@ -2,10 +2,27 @@
 
 > Lint and maintain many projects at once
 
+Like [ESLint](https://eslint.org) for your entire computer and more than just JavaScript.
+
+## Contents
+
+ - [Why?](#why)
+ - [Install](#install)
+ - [Usage](#usage)
+ - [Rules](#rules)
+ - [Data Types](#data-types)
+ - [API](#api)
+ - [Tips](#tips)
+ - [FAQ](#faq)
+ - [Related](#related)
+ - [Contributing](#contributing)
+ - [License](#license)
+
 ## Why?
 
  - Some of us have a lot of modules.
- - We often want to operate on modules in concert.
+ - We often want to change multiple modules simultaneously.
+ - Helps you scale and keep track of todos across projects.
  - Easy maintenance means happy developers and users.
 
 ## Install
@@ -180,6 +197,24 @@ Example:
     foo          : ['error', 'blah']
 }
 ```
+
+## Tips
+
+### Enable rules gently
+
+Because Mop checks many projects at once, enabling a single rule can cause many more errors to be reported than in tools like ESLint that check a single project. THis is good, as it gives you a high level view of where fixes are needed. However, when you are initially configuring Mop, you should enable rules one at a time in order to avoid being overwhelmed.
+
+## FAQ
+
+### How is this different than ESLint?
+
+Mop checks every project it can find, whereas ESLint only checks a single project. Mop also doesn't care what language you use, although it is optimized for JavaScript projects. It is actually more like [clinton](https://github.com/SamVerschueren/clinton) than ESLint, but people are more familiar with ESLint, hence the comparison.
+
+## Related
+
+ - [clinton](https://github.com/SamVerschueren/clinton) - Project style linter for individual projects
+ - [XO](https://github.com/sindresorhus/xo) - JavaScript linter for individual projects
+ - [Stylelint](https://github.com/stylelint/stylelint) - CSS linter for individual projects
 
 ## Contributing
 
