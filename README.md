@@ -37,10 +37,15 @@ npm install mop-cli --global
 $ mop --help
 
   Usage
-    $ mop [pinned | outdated]
+    $ mop [rule-name]
+
+  Option
+    --cwd       Working directory to search for projects
+    --reporter  How to display and stylize results
 
   Example
-    $ mop pinned
+    $ mop caret-deps
+    $ mop caret-deps --reporter=eslint
 ```
 
 *Tip: On Node < 7.6, `mop` needs to be `node --harmony "$(which mop)"`*

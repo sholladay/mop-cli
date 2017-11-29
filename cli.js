@@ -6,10 +6,15 @@ require('throw-rejects')();
 require('root-check')();
 const cli = require('meow')(`
     Usage
-      $ mop [pinned | outdated]
+      $ mop [rule-name]
+
+    Option
+      --cwd       Working directory to search for projects
+      --reporter  How to display and stylize results
 
     Example
-      $ mop pinned
+      $ mop caret-deps
+      $ mop caret-deps --reporter=eslint
 `);
 const eslint = require('./reporter/eslint');
 const fancy = require('./reporter/fancy');
