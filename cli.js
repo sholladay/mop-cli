@@ -4,9 +4,6 @@
 
 require('throw-rejects')();
 require('root-check')();
-const table = require('text-table');
-const { bold } = require('chalk');
-const stripAnsi = require('strip-ansi');
 const cli = require('meow')(`
     Usage
       $ mop [pinned | outdated]
@@ -14,7 +11,8 @@ const cli = require('meow')(`
     Example
       $ mop pinned
 `);
-const humanTitle = require('./lib/human-title');
+const eslint = require('./reporter/eslint');
+const fancy = require('./reporter/fancy');
 const mop = require('.');
 
 require('update-notifier')({ pkg : cli.pkg }).notify();
@@ -22,44 +20,9 @@ require('update-notifier')({ pkg : cli.pkg }).notify();
 const [ruleName] = cli.input;
 
 if (!ruleName) {
-    console.error('Please provide a command for mop to do.');
+    console.error('Please enable at least one rule. Example: $ mop caret-deps');
     process.exit(1);
 }
-
-const humanDepType = (key) => {
-    return humanTitle(key).replace('Dependencies', 'Dependency');
-};
-const headline = bold.yellow.underline;
-const columnHead = (str) => {
-    return bold.cyan(str);
-};
-
-const showTable = (lines) => {
-    console.log(table(lines, {
-        stringLength(str) {
-            return stripAnsi(str).length;
-        }
-    }) + '\n');
-};
-
-const lines = Object.assign(Object.create(null), {
-    'latest-deps' : (depContainer) => {
-        return Object.entries(depContainer).reduce((rows, [depType, depMap]) => {
-            rows.push([humanDepType(depType), 'Wanted', 'Latest'].map(columnHead));
-            return rows.concat(Object.entries(depMap).map(([name, spec]) => {
-                return [name, spec.wanted, spec.latest];
-            }));
-        }, []);
-    },
-    'caret-deps' : (depContainer) => {
-        return Object.entries(depContainer).reduce((rows, [depType, depMap]) => {
-            rows.push([humanDepType(depType), 'Wanted', 'Expected'].map(columnHead));
-            return rows.concat(Object.entries(depMap).map(([name, spec]) => {
-                return [name, spec.wanted, spec.expected];
-            }));
-        }, []);
-    }
-})[ruleName];
 
 mop({
     cwd    : cli.flags.cwd,
@@ -67,14 +30,8 @@ mop({
         [ruleName] : 'error'
     }
 }).then((failedProjects) => {
-    failedProjects.forEach((project) => {
-        console.log(headline(project.name));
-        showTable(lines(project.problems[0].data));
-    });
-    if (failedProjects.length > 0) {
-        const subject = failedProjects.length === 1 ? 'project' : 'projects';
-        console.error(bold.red(failedProjects.length + ' failed', subject));
-    }
+    const report = cli.flags.reporter === 'eslint' ? eslint : fancy;
+    console.error(report(failedProjects));
     const hasError = failedProjects.some((project) => {
         return project.errors.length > 0;
     });
