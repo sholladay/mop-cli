@@ -36,7 +36,7 @@
         "chalk": "^2.1.0",
         "humanize-string": "^1.0.1",
         "latest-version": "^3.1.0",
-        "meow": "^3.7.0",
+        "meow": "^4.0.0",
         "project-dirs": "^0.1.1",
         "read-pkg": "^3.0.0",
         "root-check": "^1.0.0",
@@ -48,7 +48,7 @@
         "update-notifier": "^2.2.0"
     },
     "devDependencies": {
-        "ava": "^0.23.0",
+        "ava": "^0.24.0",
         "eslint-config-tidy": "^0.5.0",
         "xo": "^0.18.2"
     },
