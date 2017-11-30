@@ -5,13 +5,13 @@ const loadRule = require('./lib/load-rule');
 const findProjects = require('./lib/find-projects');
 
 const lint = async (option) => {
-    const config = Object.assign({}, option);
+    const config = { ...option };
     const cwd = path.resolve(config.cwd || '');
     const projects = config.projects || await findProjects(cwd);
     if (!projects || projects.length < 1) {
         throw new RangeError('You must provide at least one project');
     }
-    const ruleConfig = Object.assign({}, config.rule);
+    const ruleConfig = { ...config.rule };
     const rules = Object.keys(ruleConfig)
         .filter((ruleId) => {
             const [severity] = [].concat(ruleConfig[ruleId]);
@@ -33,16 +33,18 @@ const lint = async (option) => {
             const ruleId = rule.id;
             const [severity, ...ruleArgs] = [].concat(ruleConfig[ruleId]);
             const ruleResult = await rule(project, ...ruleArgs);
-            return ruleResult && Object.assign({}, ruleResult, {
+            return ruleResult && {
+                ...ruleResult,
                 ruleId,
                 severity
-            });
+            };
         }));
         const problems = ruleResults.filter((ruleResult) => {
             return Boolean(ruleResult);
         });
 
-        return Object.assign({}, project, {
+        return {
+            ...project,
             problems,
             errors : problems.filter(({ severity }) => {
                 return severity === 'error';
@@ -50,7 +52,7 @@ const lint = async (option) => {
             warnings : problems.filter(({ severity }) => {
                 return severity === 'warn';
             })
-        });
+        };
     }));
     return projectResults.filter(({ problems }) => {
         return problems.length > 0;
