@@ -39,7 +39,7 @@
         "humanize-string": "^1.0.1",
         "latest-version": "^3.1.0",
         "meow": "^4.0.0",
-        "project-dirs": "^0.1.1",
+        "project-dirs": "^0.2.0",
         "read-pkg": "^3.0.0",
         "root-check": "^1.0.0",
         "semver": "^5.3.0",
