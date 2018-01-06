@@ -7,7 +7,7 @@ const format = (projects) => {
     const byPath = new Map();
     projects.forEach((project) => {
         project.problems.forEach((problem) => {
-            const fp = path.resolve(project.path, problem.path);
+            const fp = path.resolve(project.path, problem.path || '');
             const list = byPath.has(fp) ? byPath.get(fp) : [];
             list.push(problem);
             byPath.set(fp, list);
