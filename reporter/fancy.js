@@ -42,7 +42,11 @@ const org = Object.assign(Object.create(null), {
 
 const format = (failedProjects) => {
     const parts = failedProjects.map((project) => {
-        return headline(project.name) + '\n' + showTable(org[project.problems[0].ruleId](project.problems[0].data));
+        const { ruleId } = project.problems[0];
+        if (typeof org[ruleId] !== 'function') {
+            throw new TypeError(`Fancy reporter does not know how to display results for rule "${ruleId}"`);
+        }
+        return headline(project.name) + '\n' + showTable(org[ruleId](project.problems[0].data));
     });
     if (failedProjects.length > 0) {
         const subject = failedProjects.length === 1 ? 'project' : 'projects';
