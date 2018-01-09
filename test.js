@@ -1,6 +1,12 @@
+import fs from 'fs';
+import util from 'util';
+import childProcess from 'child_process';
+import mkdirtemp from 'mkdirtemp';
 import test from 'ava';
 import caretDeps from './lib/rule/caret-deps';
+import git from './lib/git';
 
+const exec = util.promisify(childProcess.exec);
 const makePackage = (pkg) => {
     return { pkg };
 };
@@ -46,4 +52,17 @@ test('rule: caret-deps', (t) => {
             }
         }
     });
+});
+
+test('git helper module', async (t) => {
+    const cwd = await mkdirtemp();
+    const { stdout } = exec(`ls ${cwd}`);
+
+    //  Assert that .git directory does not exist.
+    t.not(stdout, '');
+
+    await git('init', { cwd });
+    await fs.writeFile(`${cwd}/test.js`);
+    const checkRepo = await git('status --porcelain', { cwd });
+    t.is(checkRepo.slice(2), ' test.js');
 });
